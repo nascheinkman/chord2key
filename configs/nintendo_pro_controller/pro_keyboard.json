@@ -1,0 +1,1658 @@
+{
+  "device_name": "Nintendo Switch Pro Controller",
+  "axis_thresholds": [
+    [
+      "ABS_X",
+      {
+        "dir": "Greater",
+        "threshold": 2000
+      }
+    ],
+    [
+      "ABS_X",
+      {
+        "dir": "Lesser",
+        "threshold": -2000
+      }
+    ],
+    [
+      "ABS_Y",
+      {
+        "dir": "Greater",
+        "threshold": 2000
+      }
+    ],
+    [
+      "ABS_Y",
+      {
+        "dir": "Lesser",
+        "threshold": -2000
+      }
+    ],
+    [
+      "ABS_RX",
+      {
+        "dir": "Greater",
+        "threshold": 16000
+      }
+    ],
+    [
+      "ABS_RX",
+      {
+        "dir": "Lesser",
+        "threshold": -16000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Greater",
+        "threshold": 16000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Lesser",
+        "threshold": -16000
+      }
+    ],
+    [
+      "ABS_HAT0X",
+      {
+        "dir": "Greater",
+        "threshold": 1
+      }
+    ],
+    [
+      "ABS_HAT0X",
+      {
+        "dir": "Lesser",
+        "threshold": -1
+      }
+    ],
+    [
+      "ABS_HAT0Y",
+      {
+        "dir": "Greater",
+        "threshold": 1
+      }
+    ],
+    [
+      "ABS_HAT0Y",
+      {
+        "dir": "Lesser",
+        "threshold": -1
+      }
+    ]
+  ],
+  "chord_inputs": [
+    {
+      "Key": "BTN_SOUTH"
+    },
+    {
+      "Key": "BTN_WEST"
+    },
+    {
+      "Key": "BTN_NORTH"
+    },
+    {
+      "Key": "BTN_EAST"
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_HAT0X",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_HAT0X",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_HAT0Y",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_HAT0Y",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RY",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RY",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RX",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RX",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "Key": "BTN_THUMBR"
+    },
+    {
+      "Key": "BTN_THUMBL"
+    },
+    {
+      "Key": "BTN_SELECT"
+    },
+    {
+      "Key": "BTN_MODE"
+    },
+    {
+      "Key": "BTN_Z"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_Z"
+        },
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "pro_blank.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_APOSTROPHE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_0"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_1"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_2"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_3"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_4"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_5"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_6"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_7"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_8"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_THUMBR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_9"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_A"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_B"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_C"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_D"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_E"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_F"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_G"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_H"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_I"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_J"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_K"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_L"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_M"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_N"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_O"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_P"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_Q"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_WEST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_R"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_S"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_T"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_U"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_V"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_W"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_X"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_Y"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Greater"
+          }
+        },
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_Z"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_LEFTBRACE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_RIGHTBRACE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_SEMICOLON"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_EQUAL"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_COMMA"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_DOT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_MINUS"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_SLASH"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_BACKSLASH"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0Y",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_SPACE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_UP"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_DOWN"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_HAT0X",
+            "threshold": "Lesser"
+          }
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_BACKSPACE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_MODE"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_ENTER"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_Z"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_ESC"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_Z"
+        },
+        {
+          "Key": "BTN_MODE"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_TAB"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [
+    [
+      {
+        "Key": "BTN_TR2"
+      },
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTSHIFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Key": "BTN_TL2"
+      },
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTCTRL"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Key": "BTN_TL"
+      },
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTMETA"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Key": "BTN_TR"
+      },
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTALT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Key": "BTN_START"
+      },
+      {
+        "InnerAction": {
+          "RepeatLastChord": "Toggle"
+        }
+      }
+    ]
+  ],
+  "mouse_mapping": [
+    [
+      {
+        "axis": "ABS_X",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_X",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_Y",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_Y",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ]
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "device_name": "Nintendo Switch Combined Joy-Cons",
+  "axis_thresholds": [],
+  "chord_inputs": [
+    {
+      "Key": "BTN_SOUTH"
+    },
+    {
+      "Key": "BTN_WEST"
+    },
+    {
+      "Key": "BTN_NORTH"
+    },
+    {
+      "Key": "BTN_EAST"
+    },
+    {
+      "Key": "BTN_Z"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_Z"
+        },
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "joycon_keyboard.json"
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": []
+}
