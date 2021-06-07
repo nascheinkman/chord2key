@@ -4,6 +4,11 @@ version = "0.1.0"
 authors = ["Nathan Scheinkman <nascheinkman@protonmail.com>"]
 edition = "2018"
 license = "MIT/Apache-2.0"
+description = "Chorded gamepad input on linux"
+homepage = "https://github.com/nascheinkman/chord2key"
+documentation = "https://github.com/nascheinkman/chord2key"
+repository = "https://github.com/nascheinkman/chord2key"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
@@ -13,7 +18,7 @@ doc = true
 path="src/lib.rs"
 
 [dependencies]
-evdev = {git="https://github.com/emberian/evdev"}
+evdev = "0.11.0"
 strum = "0.11.0"
 strum_macros = "0.11.0"
 serde = { version = "1.0", features = ["derive"] }

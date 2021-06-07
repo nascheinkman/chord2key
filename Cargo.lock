@@ -54,8 +54,9 @@ dependencies = [
 
 [[package]]
 name = "evdev"
-version = "0.11.0-alpha.6"
-source = "git+https://github.com/emberian/evdev#99a025e464c2e42e8368d0bb50264db0247aaaf1"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b8a9fbd0d18faa6e194945a35d8f57b504502835a4a82a622723b8184818e72a"
 dependencies = [
  "bitvec",
  "libc",
