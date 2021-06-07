@@ -6,8 +6,10 @@ use crate::mapping::thresholds::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+/// A list of tuples that map [ModifierInput] to an [Action].
 pub type ModifierMapInput = Vec<(ModifierInput, Action)>;
 
+/// The input types used for modifiers.
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum ModifierInput {
     Key(KeyCode),
@@ -104,9 +106,9 @@ impl ModifierMap {
             }
         }
         Self {
-            modifier_mapping: modifier_mapping,
+            modifier_mapping,
             axis_thresholds: all_a_t,
-            axis_states: axis_states,
+            axis_states,
         }
     }
 }

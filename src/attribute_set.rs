@@ -80,7 +80,7 @@ impl<T: Hash + Eq> AttributeSet<T> {
         hashset.into_iter().enumerate().for_each(|(i, val)| {
             indexes.insert(val, i);
         });
-        Rc::new(Self { indexes: indexes })
+        Rc::new(Self { indexes })
     }
 
     /// Creates a new AttributeSet from a set U that contains items T for the AttributeSet.
@@ -111,6 +111,19 @@ impl<T: Hash + Eq> AttributeSet<T> {
     /// ```
     pub fn len(&self) -> usize {
         self.indexes.len()
+    }
+
+    /// Returns `true` if the set contains no elements
+    ///
+    /// # Example:
+    /// ```
+    /// use chord2key::attribute_set::*;
+    ///
+    /// let attr_set = AttributeSet::<i32>::from(vec![]);
+    /// assert!(attr_set.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.indexes.is_empty()
     }
 
     /// Returns true if the set contains an item
@@ -317,7 +330,7 @@ where
         let items = BitVec::repeat(false, set.len());
         Self {
             parent: set.clone(),
-            items: items,
+            items,
         }
     }
 
@@ -428,7 +441,7 @@ where
     /// let min: i32 = *subset.items().min().unwrap();
     /// assert_eq!(min, 4);
     /// ```
-    pub fn items<'b>(&self) -> impl Iterator<Item = &T> {
+    pub fn items(&self) -> impl Iterator<Item = &T> {
         let items = &self.items;
         self.parent
             .map_iter()

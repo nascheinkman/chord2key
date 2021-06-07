@@ -11,10 +11,10 @@ use crate::output::device::*;
 use crate::strum::IntoEnumIterator;
 use std::collections::HashMap;
 use std::error::Error;
-use std::iter::FromIterator;
 use std::path::{Path, PathBuf};
 
-pub use super::maps::chord_map::{Chord, ChordInput, ChordMapInput};
+// Publicly export the data types used to create the internal mappers
+pub use super::maps::chord_map::{ChordInput, ChordMapInput};
 pub use super::maps::modifier_map::{ModifierInput, ModifierMapInput};
 pub use super::maps::mouse_map::{MouseInput, MouseMapInput, MouseProfile};
 
@@ -23,6 +23,8 @@ struct Maps {
     pub modifiers: ModifierMap,
     pub mouse: MouseMap,
 }
+
+/// Converts an [InputEvent] to the expected [Action] and emits it using its stored [OutputDevice].
 pub struct Mapper {
     output_device: OutputDevice,
     input_device_name: String,
@@ -36,7 +38,7 @@ impl Mapper {
         let thresholds = AllAxisThresholds::init(config.axis_thresholds);
         let chord_mapping = ChordMap::init(config.chord_mapping, thresholds.clone());
         let modifier_mapping = ModifierMap::init(config.modifier_mapping, thresholds.clone());
-        let mouse_mapping = MouseMap::init(config.mouse_mapping, thresholds.clone());
+        let mouse_mapping = MouseMap::init(config.mouse_mapping, thresholds);
 
         Maps {
             chords: chord_mapping,
@@ -44,6 +46,8 @@ impl Mapper {
             mouse: mouse_mapping,
         }
     }
+
+    /// Initializes from a configuration file. See also [Configuration].
     pub fn init_from_file<P: AsRef<Path>>(
         device: OutputDevice,
         path: P,
@@ -52,7 +56,7 @@ impl Mapper {
         let mut device_name: Option<String> = None;
         let mut paths_to_indices = HashMap::<Option<PathBuf>, usize>::new();
         let mut mappings_vec = Vec::<Maps>::new();
-        let mut config_paths: Vec<PathBuf> = vec![pathbuf.clone()];
+        let mut config_paths: Vec<PathBuf> = vec![pathbuf];
 
         let mut i = 0;
 
@@ -72,15 +76,14 @@ impl Mapper {
                 Some(name) => {
                     if name != &config.device_name {
                         println!("{} != {}", name, &config.device_name);
-                        return Err(
-                            Box::new(
-                                std::io::Error::new(
-                                    std::io::ErrorKind::Other, 
-                                    format!("Device in configuration file {:?} does not match \
-                                            device in source file", &config_paths[i])
-                                )
-                            )
-                        );
+                        return Err(Box::new(std::io::Error::new(
+                            std::io::ErrorKind::Other,
+                            format!(
+                                "Device in configuration file {:?} does not match \
+                                            device in source file",
+                                &config_paths[i]
+                            ),
+                        )));
                     }
                 }
                 None => {
@@ -92,7 +95,8 @@ impl Mapper {
             let mut maps = Self::get_mappings(config);
 
             // Look at all the actions in the chord_mapping
-            maps.chords.peek_actions_mut()
+            maps.chords
+                .peek_actions_mut()
                 // Look at all the actions in the modifier_mapping
                 .chain(maps.modifiers.peek_actions_mut())
                 // Find all configuration-related actions
@@ -112,8 +116,9 @@ impl Mapper {
                         }
 
                         // Push new config files to the stack
-                        if !paths_to_indices.contains_key(&Some(p.to_path_buf())) {
-                            config_paths.push(p);
+                        let p_opt = Some(p);
+                        if !paths_to_indices.contains_key(&p_opt) {
+                            config_paths.push(p_opt.unwrap());
                         }
                     }
                     Ok(())
@@ -131,11 +136,12 @@ impl Mapper {
             output_device: device,
             input_device_name: device_name,
             current_config_index: 0,
-            paths_to_indices: paths_to_indices,
-            mappings_vec: mappings_vec,
+            paths_to_indices,
+            mappings_vec,
         })
     }
 
+    /// Gets the input device name
     pub fn get_input_name(&self) -> &str {
         &self.input_device_name
     }
@@ -147,9 +153,7 @@ impl Mapper {
                 keys: KeyCode::iter().collect(),
                 state: PressState::Up,
             }),
-            Some(AxisList::from_iter(
-                RelAxisCode::iter().map(|code| RelAxisEvent::new(code, 0)),
-            )),
+            Some(RelAxisCode::iter().map(|code| RelAxisEvent::new(code, 0)).collect()),
         );
         self.handle_action(handsoff.into());
     }
@@ -217,6 +221,8 @@ impl Mapper {
         }
     }
 
+    /// Handles the given [InputEvent], changing the internal state and emitting relevant output
+    /// actions.
     pub fn handle_event(&mut self, ev: &InputEvent) {
         let chord_act_opt = self.get_chord_mapping_mut().handle_event(ev);
         if let Some(action) = chord_act_opt {

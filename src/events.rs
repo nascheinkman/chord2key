@@ -27,8 +27,8 @@ impl KeyEvent {
     /// ```
     pub fn new(key: KeyCode, state: PressState) -> Self {
         Self {
-            key: key,
-            state: state,
+            key,
+            state,
         }
     }
 
@@ -77,13 +77,13 @@ impl TryFrom<evdev::InputEvent> for KeyEvent {
             match ev.value() {
                 1 => {
                     return Ok(Self {
-                        key: key,
+                        key,
                         state: PressState::Down,
                     })
                 }
                 0 => {
                     return Ok(Self {
-                        key: key,
+                        key,
                         state: PressState::Up,
                     })
                 }
@@ -119,7 +119,7 @@ impl RelAxisEvent {
     /// ```
     pub fn new(axis: RelAxisCode, val: AxisState) -> Self {
         Self {
-            axis: axis,
+            axis,
             state: val,
         }
     }
@@ -176,7 +176,7 @@ impl TryFrom<evdev::InputEvent> for RelAxisEvent {
                 None => return Err(error),
             };
             return Ok(Self {
-                axis: axis,
+                axis,
                 state: ev.value(),
             });
         }
@@ -208,8 +208,8 @@ impl AbsAxisEvent {
     /// ```
     pub fn new(axis: AbsAxisCode, state: AxisState) -> Self {
         Self {
-            axis: axis,
-            state: state,
+            axis,
+            state,
         }
     }
 
@@ -250,7 +250,7 @@ impl TryFrom<evdev::InputEvent> for AbsAxisEvent {
                 None => return Err(error),
             };
             return Ok(Self {
-                axis: axis,
+                axis,
                 state: ev.value(),
             });
         }

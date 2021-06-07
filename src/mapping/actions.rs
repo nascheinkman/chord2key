@@ -1,17 +1,17 @@
 use crate::output::actions::*;
 use serde::{Deserialize, Serialize};
 
-/// User actions accepted by the chord2key [Mapper].
+/// User actions accepted by the chord2key Mapper.
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum Action {
-    /// Actions that are sent to the [OutputDevice].
+    /// Actions that are sent to the OutputDevice.
     OutputAction(OutputAction),
 
-    /// Actions that act on or depend on the internal state of the [Mapper].
+    /// Actions that act on or depend on the internal state of the Mapper.
     InnerAction(InnerAction),
 }
 
-/// Actions that act on or depend on the internal state of the [Mapper].
+/// Actions that act on or depend on the internal state of the Mapper.
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum InnerAction {
     /// Repeat the last emitted chord in whatever [OutputActionType], converting if necessary

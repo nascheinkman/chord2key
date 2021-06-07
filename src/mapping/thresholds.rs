@@ -49,10 +49,10 @@ impl ThresholdedAxis {
     ///
     /// let t_axis = ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Greater);
     /// ```
-    pub fn new(code: AbsAxisCode, threshold: ThresholdType) -> Self {
+    pub fn new(axis: AbsAxisCode, threshold: ThresholdType) -> Self {
         Self {
-            axis: code,
-            threshold: threshold,
+            axis,
+            threshold,
         }
     }
 
@@ -67,7 +67,6 @@ impl ThresholdedAxis {
     /// let t_axis_opp = t_axis.opposite();
     /// assert_eq!(t_axis_opp.threshold(), ThresholdType::Lesser);
     /// ```
- 
     pub fn opposite(&self) -> Self {
         Self {
             axis: self.axis,
@@ -128,7 +127,7 @@ impl ThresholdType {
     }
 }
 
-/// An threshold for an Absolute Axis in one direction
+/// A threshold for an Absolute Axis in one direction
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct AxisThreshold {
     /// The direction for the axis to surpass the threshold in.
@@ -160,8 +159,8 @@ impl AxisThreshold {
     pub fn is_passing(&self, axis_event: &AbsAxisEvent) -> bool {
         let state = axis_event.state();
 
-        return (self.dir == ThresholdType::Greater && state >= self.threshold)
-            || (self.dir == ThresholdType::Lesser && state <= self.threshold);
+        (self.dir == ThresholdType::Greater && state >= self.threshold)
+        || (self.dir == ThresholdType::Lesser && state <= self.threshold)
     }
 
     /// Changes self to have the lesser magnitude threshold, returning true if successful.
@@ -221,7 +220,7 @@ impl AxisThreshold {
             }
             return true;
         }
-        return false;
+        false
     }
 }
 
@@ -299,12 +298,25 @@ impl AxisThresholds {
     }
 }
 
+/// A structure holding all of the configured axis thresholds
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct AllAxisThresholds {
     map: HashMap<AbsAxisCode, AxisThresholds>,
 }
 
 impl AllAxisThresholds {
+    /// Creates a new AllAxisThresholds
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::thresholds::*;
+    /// use chord2key::constants::*;
+    ///
+    /// let a_a_t = AllAxisThresholds::init(vec![
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Greater, threshold: 2000}),
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Lesser, threshold: -2000}),
+    /// ]);
+    /// ```
     pub fn init(thresholds: Vec<(AbsAxisCode, AxisThreshold)>) -> Self {
         let mut map = HashMap::<AbsAxisCode, AxisThresholds>::new();
         for (code, threshold) in thresholds {
@@ -315,14 +327,83 @@ impl AllAxisThresholds {
             }
         }
 
-        Self { map: map }
+        Self { map }
     }
+
+    /// Returns the passing [ThresholdedAxis] input from the [AbsAxisEvent], if any
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::thresholds::*;
+    /// use chord2key::constants::*;
+    /// use chord2key::events::*;
+    ///
+    /// let a_a_t = AllAxisThresholds::init(vec![
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Greater, threshold: 2000}),
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Lesser, threshold: -2000}),
+    /// ]);
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing(&AbsAxisEvent::new(AbsAxisCode::ABS_X, 4000)),
+    ///     Some(ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Greater))
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing(&AbsAxisEvent::new(AbsAxisCode::ABS_X, -4000)),
+    ///     Some(ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Lesser))
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing(&AbsAxisEvent::new(AbsAxisCode::ABS_X, 0)),
+    ///     None
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing(&AbsAxisEvent::new(AbsAxisCode::ABS_Y, 4000)),
+    ///     None
+    /// );
+    /// ```
     pub fn get_passing(&self, axis_event: &AbsAxisEvent) -> Option<ThresholdedAxis> {
         self.map
             .get(&axis_event.axis())
             .map(|thresholds| thresholds.get_passing(axis_event))
             .flatten()
     }
+
+    /// Returns the passing [ThresholdedAxis] input from the [AbsAxisEvent], if any, along with the
+    /// threshold [AxisState] value.
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::thresholds::*;
+    /// use chord2key::constants::*;
+    /// use chord2key::events::*;
+    ///
+    /// let a_a_t = AllAxisThresholds::init(vec![
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Greater, threshold: 2000}),
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Lesser, threshold: -2000}),
+    /// ]);
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing_with_state(&AbsAxisEvent::new(AbsAxisCode::ABS_X, 4000)),
+    ///     Some((ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Greater), 2000))
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing_with_state(&AbsAxisEvent::new(AbsAxisCode::ABS_X, -4000)),
+    ///     Some((ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Lesser), -2000))
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing_with_state(&AbsAxisEvent::new(AbsAxisCode::ABS_X, 0)),
+    ///     None
+    /// );
+    ///
+    /// assert_eq!(
+    ///     a_a_t.get_passing_with_state(&AbsAxisEvent::new(AbsAxisCode::ABS_Y, 4000)),
+    ///     None
+    /// );
+    /// ```
     pub fn get_passing_with_state(
         &self,
         axis_event: &AbsAxisEvent,
@@ -333,10 +414,48 @@ impl AllAxisThresholds {
             .flatten()
     }
 
+    /// Returns if the axis within the [AbsAxisEvent] has a stored threshold
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::thresholds::*;
+    /// use chord2key::constants::*;
+    /// use chord2key::events::*;
+    ///
+    /// let a_a_t = AllAxisThresholds::init(vec![
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Greater, threshold: 2000}),
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Lesser, threshold: -2000}),
+    /// ]);
+    ///
+    /// assert!(a_a_t.has_threshold(&AbsAxisEvent::new(AbsAxisCode::ABS_X, 4000)));
+    /// assert!(!a_a_t.has_threshold(&AbsAxisEvent::new(AbsAxisCode::ABS_Y, 4000)));
+    /// ```
     pub fn has_threshold(&self, axis_event: &AbsAxisEvent) -> bool {
         self.map.contains_key(&axis_event.axis())
     }
 
+    /// Returns an iterator over all the AbsAxisCodes that have a threshold
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::thresholds::*;
+    /// use chord2key::constants::*;
+    /// use chord2key::events::*;
+    ///
+    /// let a_a_t = AllAxisThresholds::init(vec![
+    ///     (AbsAxisCode::ABS_X, AxisThreshold{dir: ThresholdType::Greater, threshold: 2000}),
+    ///     (AbsAxisCode::ABS_Y, AxisThreshold{dir: ThresholdType::Lesser, threshold: -2000}),
+    ///     (AbsAxisCode::ABS_RX, AxisThreshold{dir: ThresholdType::Greater, threshold: 1000}),
+    /// ]);
+    ///
+    /// let mut codes = vec![&AbsAxisCode::ABS_X, &AbsAxisCode::ABS_Y, &AbsAxisCode::ABS_RX];
+    /// let mut test_codes: Vec<&AbsAxisCode> = a_a_t.codes().collect();
+    ///
+    /// codes.sort();
+    /// test_codes.sort();
+    ///
+    /// assert_eq!(test_codes, codes);
+    /// ```
     pub fn codes(&self) -> impl Iterator<Item = &AbsAxisCode> {
         self.map.iter().map(|(key, _)| key)
     }

@@ -145,7 +145,7 @@ impl VirtualOutput {
 
         let mut axis_set = evdev::AttributeSet::<evdev::RelativeAxisType>::new();
         RelAxisCode::iter().for_each(|axis| {
-            axis_set.insert(evdev::RelativeAxisType::from(axis.clone()));
+            axis_set.insert(evdev::RelativeAxisType::from(axis));
             rel_axes_vals.insert(axis, 0);
         });
 

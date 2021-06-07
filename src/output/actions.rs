@@ -47,8 +47,8 @@ impl Toggle {
     /// ```
     pub fn new(keys: Option<KeyList>, axes: Option<AxisList>) -> Self {
         Self {
-            keys: keys,
-            axes: axes,
+            keys,
+            axes,
         }
     }
 }
@@ -75,8 +75,8 @@ impl Pulse {
     /// ```
     pub fn new(keys: Option<KeyList>, axes: Option<AxisList>) -> Self {
         Self {
-            keys: keys,
-            axes: axes,
+            keys,
+            axes,
         }
     }
 }
@@ -107,8 +107,8 @@ impl StateChange {
     /// ```
     pub fn new(keys: Option<KeyStateChange>, axes: Option<AxisList>) -> Self {
         Self {
-            keys: keys,
-            axes: axes,
+            keys,
+            axes,
         }
     }
 
@@ -206,7 +206,7 @@ impl From<Pulse> for StateChange {
     fn from(pulse: Pulse) -> Self {
         Self {
             keys: pulse.keys.map(|keys| KeyStateChange {
-                keys: keys,
+                keys,
                 state: PressState::Down,
             }),
             axes: pulse.axes,
@@ -217,7 +217,7 @@ impl From<Toggle> for StateChange {
     fn from(t: Toggle) -> Self {
         Self {
             keys: t.keys.map(|keys| KeyStateChange {
-                keys: keys,
+                keys,
                 state: PressState::Down,
             }),
             axes: t.axes,

@@ -84,8 +84,7 @@ mod tests {
                 board.execute_event(OutputAction::Pulse(pulse)).ok();
                 sleep(Duration::from_millis(30));
             }
-
-            println!("");
+            println!();
         }
 
         pub fn test_combo_states() {
@@ -116,7 +115,7 @@ mod tests {
             board.execute_event(OutputAction::StateChange(change)).ok();
             sleep(Duration::from_millis(1000));
 
-            println!("");
+            println!();
         }
 
         pub fn test_all() {

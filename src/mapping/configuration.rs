@@ -34,10 +34,16 @@ pub struct Configuration {
 }
 
 impl Configuration {
+    /// Save the configuration to a new file at the specified path.
     pub fn save_to_file<P: AsRef<Path>>(&self, path: P) -> Result<(), Box<dyn Error>> {
-        serde_json::to_writer_pretty(&File::create(path).unwrap(), self)?;
+        serde_json::to_writer_pretty(&File::create(path)?, self)?;
         Ok(())
     }
+
+    /// Load a configuration from a file at the specified path.
+    ///
+    /// Will return an error if the file is not readable, or if the configuration is badly
+    /// formatted.
     pub fn load_from_file<P: AsRef<Path>>(path: P) -> Result<Self, Box<dyn Error>> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
@@ -47,9 +53,23 @@ impl Configuration {
         Ok(config)
     }
 
+    /// Returns a default joycon configuration mapped to the keyboard
+    ///
+    /// Example:
+    /// ```
+    /// use chord2key::mapping::configuration::*;
+    ///
+    /// let joycon_config = Configuration::joycon_default();
+    /// assert_eq!(String::from("Nintendo Switch Combined Joy-Cons"), joycon_config.device_name);
+    /// ```
     #[allow(non_snake_case)]
     pub fn joycon_default() -> Self {
+        // The name reported by the OS for the combined joycons device.
         let device_name = String::from("Nintendo Switch Combined Joy-Cons");
+
+        // The absolute axes report their value as a value between -32768 and 32767. These
+        // thresholds define a quadrilateral deadzone where low value axis events will be considered
+        // zero.
         let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
             (AbsAxisCode::ABS_X, (ThresholdType::Greater, 6000).into()),
             (AbsAxisCode::ABS_X, (ThresholdType::Lesser, -6000).into()),
@@ -60,7 +80,14 @@ impl Configuration {
             (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 16000).into()),
             (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -16000).into()),
         ];
+
+        // The absolute axes report their value between -32768 and 32767, but mouse events are
+        // currently emitted every 20ms, causing mouse speeds above values of 20 to be pretty fast.
+        // Thus the sensitivity for mouse movement (AKA the slope) is a very small number to bring
+        // those high axis ranges down to a usable speed.
         const SENSITIVITY: f64 = 0.0006;
+
+        // Mapping joycon absolute axis inputs to mouse movement output
         let mouse_mapping: MouseMapInput = vec![
             (
                 (AbsAxisCode::ABS_X, ThresholdType::Greater).into(),
@@ -95,6 +122,9 @@ impl Configuration {
                 },
             ),
         ];
+
+        // One to one mapping of joycon buttons to commonly combined modifier keys. None of the
+        // buttons listed here should be used in chorded input.
         let modifier_mapping: ModifierMapInput = vec![
             (
                 KeyCode::BTN_TR2.into(),
@@ -112,28 +142,42 @@ impl Configuration {
                 KeyCode::BTN_TR.into(),
                 Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
             ),
+            // The plus button gets mapped to repeat the last chord that resulted in an OutputAction
             (
                 KeyCode::BTN_START.into(),
                 InnerAction::RepeatLastChord(OutputActionType::Toggle).into(),
             ),
         ];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
         let B: ChordInput = KeyCode::BTN_SOUTH.into();
         let Y: ChordInput = KeyCode::BTN_WEST.into();
         let X: ChordInput = KeyCode::BTN_NORTH.into();
         let A: ChordInput = KeyCode::BTN_EAST.into();
+
+        // Left Dpad
         let Right: ChordInput = KeyCode::BTN_DPAD_RIGHT.into();
         let Left: ChordInput = KeyCode::BTN_DPAD_LEFT.into();
         let Up: ChordInput = KeyCode::BTN_DPAD_UP.into();
         let Down: ChordInput = KeyCode::BTN_DPAD_DOWN.into();
+
+        // Right stick movements
         let RSU: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into();
         let RSD: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Greater).into();
         let RSR: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Greater).into();
         let RSL: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into();
+
+        // Right stick click
         let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Auxillary buttons
         let Minus: ChordInput = KeyCode::BTN_SELECT.into();
         let Home: ChordInput = KeyCode::BTN_MODE.into();
         let Capture: ChordInput = KeyCode::BTN_Z.into();
 
+        // Defining all the inputs used for chording
         let chord_inputs: Vec<ChordInput> = vec![
             B,
             Y,
@@ -153,8 +197,11 @@ impl Configuration {
             Home,
             Capture,
         ];
+
+        // Mapping chords to actions.
         let chord_mapping: ChordMapInput = vec![
             (
+                // Hot swaps the configuration
                 vec![Capture, A, B, X, Y],
                 InnerAction::SwitchConfig(Path::new("joycon_blank.json").to_path_buf()).into(),
             ),
@@ -385,18 +432,23 @@ impl Configuration {
         ];
 
         Self {
-            device_name: device_name,
-            axis_thresholds: axis_thresholds,
-            chord_inputs: chord_inputs,
-            chord_mapping: chord_mapping,
-            modifier_mapping: modifier_mapping,
-            mouse_mapping: mouse_mapping,
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
         }
     }
 
     #[allow(non_snake_case)]
     pub fn pro_default() -> Self {
+        // The name reported by the OS for the Pro controller
         let device_name = String::from("Nintendo Switch Pro Controller");
+
+        // The absolute axes report their value as a value between -32768 and 32767. These
+        // thresholds define a quadrilateral deadzone where low value axis events will be considered
+        // zero.
         let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
             (AbsAxisCode::ABS_X, (ThresholdType::Greater, 2000).into()),
             (AbsAxisCode::ABS_X, (ThresholdType::Lesser, -2000).into()),
@@ -411,7 +463,14 @@ impl Configuration {
             (AbsAxisCode::ABS_HAT0Y, (ThresholdType::Greater, 1).into()),
             (AbsAxisCode::ABS_HAT0Y, (ThresholdType::Lesser, -1).into()),
         ];
+
+        // The absolute axes report their value between -32768 and 32767, but mouse events are
+        // currently emitted every 20ms, causing mouse speeds above values of 20 to be pretty fast.
+        // Thus the sensitivity for mouse movement (AKA the slope) is a very small number to bring
+        // those high axis ranges down to a usable speed.
         const SENSITIVITY: f64 = 0.0006;
+
+        // Mapping pro controller absolute axis inputs to mouse movement output
         let mouse_mapping: MouseMapInput = vec![
             (
                 (AbsAxisCode::ABS_X, ThresholdType::Greater).into(),
@@ -446,6 +505,9 @@ impl Configuration {
                 },
             ),
         ];
+
+        // One to one mapping of pro controller buttons to commonly combined modifier keys. None of
+        // the buttons listed here should be used in chorded input.
         let modifier_mapping: ModifierMapInput = vec![
             (
                 KeyCode::BTN_TR2.into(),
@@ -463,28 +525,42 @@ impl Configuration {
                 KeyCode::BTN_TR.into(),
                 Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
             ),
+            // The plus button gets mapped to repeat the last chord that resulted in an OutputAction
             (
                 KeyCode::BTN_START.into(),
                 InnerAction::RepeatLastChord(OutputActionType::Toggle).into(),
             ),
         ];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
         let B: ChordInput = KeyCode::BTN_SOUTH.into();
         let Y: ChordInput = KeyCode::BTN_WEST.into();
         let X: ChordInput = KeyCode::BTN_NORTH.into();
         let A: ChordInput = KeyCode::BTN_EAST.into();
+
+        // D-pad
         let Right: ChordInput = (AbsAxisCode::ABS_HAT0X, ThresholdType::Greater).into();
         let Left: ChordInput = (AbsAxisCode::ABS_HAT0X, ThresholdType::Lesser).into();
         let Up: ChordInput = (AbsAxisCode::ABS_HAT0Y, ThresholdType::Lesser).into();
         let Down: ChordInput = (AbsAxisCode::ABS_HAT0Y, ThresholdType::Greater).into();
+
+        // Right stick
         let RSU: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into();
         let RSD: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Greater).into();
         let RSR: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Greater).into();
         let RSL: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into();
+
+        // Right stick click
         let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Auxillary buttons
         let Minus: ChordInput = KeyCode::BTN_SELECT.into();
         let Home: ChordInput = KeyCode::BTN_MODE.into();
         let Capture: ChordInput = KeyCode::BTN_Z.into();
 
+        // Defining all the inputs used for chording
         let chord_inputs: Vec<ChordInput> = vec![
             B,
             Y,
@@ -504,8 +580,11 @@ impl Configuration {
             Home,
             Capture,
         ];
+
+        // Mapping chords to actions.
         let chord_mapping: ChordMapInput = vec![
             (
+                // Hot swaps the configuration
                 vec![Capture, A, B, X, Y],
                 InnerAction::SwitchConfig(Path::new("pro_blank.json").to_path_buf()).into(),
             ),
@@ -736,12 +815,12 @@ impl Configuration {
         ];
 
         Self {
-            device_name: device_name,
-            axis_thresholds: axis_thresholds,
-            chord_inputs: chord_inputs,
-            chord_mapping: chord_mapping,
-            modifier_mapping: modifier_mapping,
-            mouse_mapping: mouse_mapping,
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
         }
     }
 }

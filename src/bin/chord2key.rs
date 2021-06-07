@@ -69,10 +69,12 @@ fn main() {
                         }
                     }
                 }
-                _ => {}
+                _ => {
+                    eprintln!("An unknown error occured: ");
+                    eprintln!("{:?}", e);
+                    std::process::exit(1);
+                }
             }
-            eprintln!("An unknown error occured: ");
-            eprintln!("{:?}", e);
         }
     }
 }

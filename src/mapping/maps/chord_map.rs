@@ -9,9 +9,13 @@ use std::collections::{HashMap, HashSet};
 use std::matches;
 use std::rc::Rc;
 
+/// A list of tuples that map a list of [ChordInput] to an [Action].
 pub type ChordMapInput = Vec<(Vec<ChordInput>, Action)>;
+
+/// The type used to represent a chord.
 pub type Chord = AttributeSubset<ChordInput>;
 
+/// The input types used to create a chord.
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum ChordInput {
     Key(KeyCode),
@@ -28,6 +32,7 @@ pub struct ChordMap {
 }
 
 impl ChordMap {
+    #[allow(clippy::ptr_arg)]
     fn construct_input_set(chord_map: &ChordMapInput) -> Rc<AttributeSet<ChordInput>> {
         let mut input_hash_set = HashSet::<ChordInput>::new();
         chord_map
@@ -174,12 +179,12 @@ impl ChordMap {
         let prev_chord = chord_inputs.empty_subset();
 
         let mut new_self = Self {
-            chord_inputs: chord_inputs,
+            chord_inputs,
             axis_thresholds: all_a_t,
-            chord_mapping: chord_mapping,
+            chord_mapping,
             primed: true,
-            state: state,
-            prev_chord: prev_chord,
+            state,
+            prev_chord,
         };
         new_self.fill_chords(chord_map);
 

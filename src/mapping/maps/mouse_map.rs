@@ -7,13 +7,33 @@ use crate::output::actions::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+/// The input type used for Mouse mapping
+///
+/// ThresholdedAxis is used in order to implement deadzones
 pub type MouseInput = ThresholdedAxis;
+
+/// A list of tuples of mapping [MouseInput] to [MouseProfile]
 pub type MouseMapInput = Vec<(MouseInput, MouseProfile)>;
 
+/// A linear acceleration profile for Mouse movement
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 pub struct MouseProfile {
+    /// The [RelAxisCode] to be used when emitting mouse events
     pub code: RelAxisCode,
-    pub slope: f64,  // m in y = mx + b
+
+    /// The linear sensitivity of the mouse.
+    ///
+    /// The mouse velocity follows the following formula:
+    /// ```ignore
+    /// mouse_velocity = MouseProfile.slope * (axis_value - threshold_value) + MouseProfile.offset
+    /// ```
+    pub slope: f64, // m in y = mx + b
+
+    /// The linear offset of the mouse.
+    /// The mouse velocity follows the following formula:
+    /// ```ignore
+    /// mouse_velocity = MouseProfile.slope * (axis_value - threshold_value) + MouseProfile.offset
+    /// ```
     pub offset: f64, // b in y = mx + b
 }
 
@@ -43,7 +63,7 @@ impl MouseMap {
                         // Axis hasn't changed threshold
                         let axis_val = ev.state() - t_val;
                         self.mouse_mapping
-                            .get(&t_axis.into())
+                            .get(&t_axis)
                             .map(|profile| (profile.map_state_to_action(axis_val), None))
                     } else {
                         // Axis swapped threshold
@@ -55,7 +75,7 @@ impl MouseMap {
                             .map(|p| p.zeroed());
                         let new_act = self
                             .mouse_mapping
-                            .get(&t_axis.into())
+                            .get(&t_axis)
                             .map(|profile| profile.map_state_to_action(axis_val));
 
                         self.axis_states.insert(ev.axis(), Some(t_axis.threshold()));
@@ -70,7 +90,7 @@ impl MouseMap {
                     let axis_val = ev.state() - t_val;
                     self.axis_states.insert(ev.axis(), Some(t_axis.threshold()));
                     self.mouse_mapping
-                        .get(&t_axis.into())
+                        .get(&t_axis)
                         .map(|profile| (profile.map_state_to_action(axis_val), None))
                 }
             },
@@ -149,9 +169,9 @@ impl MouseMap {
             axis_states.insert(input.code(), None);
         }
         Self {
-            mouse_mapping: mouse_mapping,
+            mouse_mapping,
             axis_thresholds: all_a_t,
-            axis_states: axis_states,
+            axis_states,
         }
     }
 }

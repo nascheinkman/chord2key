@@ -29,7 +29,7 @@ impl InputDevice {
     pub fn from_name(name: &str) -> Option<Self> {
         evdev::enumerate()
             .find(|d| d.name() == Some(name))
-            .map(|d| Self::from(d))
+            .map(Self::from)
     }
 
     /// Creates a new Device by querying the user through the CLI.
@@ -47,7 +47,7 @@ impl InputDevice {
         let n = chosen.trim().parse::<usize>().unwrap();
         let device = devices.into_iter().nth(n).unwrap();
 
-        Self { device: device }
+        Self { device }
     }
 
     /// Polls the device for events, sending valid events to a closure.
@@ -61,7 +61,7 @@ impl InputDevice {
 
         //let start = std::time::Instant::now();
         for event in events {
-            if let Some(input) = InputEvent::try_from(event).ok() {
+            if let Ok(input) = InputEvent::try_from(event) {
                 callback(&input);
             }
         }
