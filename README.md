@@ -1,5 +1,14 @@
 # chord2key Chorded gamepad input on Linux
 
+## About:
+
+chord2key is a chorded input converter for any linux evdev device. It allows for the control of a
+virtual keyboard and mouse using your gamepad. Other gamepad input converters can only emulate a
+subset of the keyboard -- each gamepad button is mapped to a single keyboard button. chord2key is
+different because it allows for the mapping of combinations of gamepad buttons to a single
+keyboard+mouse action. This allows for a single gamepad to have user inputs that map to the entire
+keyboard while also controlling the mouse.
+
 ## Table of contents:
 
 - [About](#about)
@@ -21,15 +30,6 @@
     - [InnerActions](#inneractions)
         - [RepeatLastChord](#repeatlastchord)
         - [SwitchConfig](#switchconfig)
-        
-## About:
-
-chord2key is a chorded input converter for any linux evdev device. It allows for the control of a
-virtual keyboard and mouse using your gamepad. Other gamepad input converters can only emulate a
-subset of the keyboard -- each gamepad button is mapped to a single keyboard button. chord2key is
-different because it allows for the mapping of combinations of gamepad buttons to a single
-keyboard+mouse action. This allows for a single gamepad to have user inputs that map to the entire
-keyboard while also controlling the mouse.
 
 ## Installation:
 
