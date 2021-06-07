@@ -22,7 +22,7 @@ keyboard while also controlling the mouse.
     - [Modifiers](#modifiers)
     - [Axis Mouse](#axis-mouse)
     - [Note: Thresholded Axis](#note-thresholded-axis)
-    - [Actions](#actions)
+- [Actions](#actions)
     - [OutputActions](#outputactions)
         - [Pulse](#pulse)
         - [StateChange](#statechange)
