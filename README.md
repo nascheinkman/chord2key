@@ -69,10 +69,10 @@ sudo target/release/chord2key configs/nintendo_pro_controller/pro_keyboard.json
 
 It's currently difficult to make your own configuration file. If you're tech-savvy, you can look at
 the source code and see how the Pro controller configuration was generated
-[here](https://github.com/nascheinkman/chord2key/blob/main/src/mapping/configuration.rs#L398), and
+[here](https://github.com/nascheinkman/chord2key/blob/9b79caea4b80a6a6185998195c7ad4672159a1b9/src/mapping/configuration.rs#L445), and
 edit it to your own needs. You can then save the configuration to a config file through the
 `config.save_to_file(FILE_PATH)` function. See the commented lines
-[here](https://github.com/nascheinkman/chord2key/blob/7ee11513a4ee7f8cee05ba6ec39c2a7f78d72b1c/src/mapping/configuration.rs#L398)
+[here](https://github.com/nascheinkman/chord2key/blob/9b79caea4b80a6a6185998195c7ad4672159a1b9/src/bin/chord2key.rs#L27)
 to see how the Pro controller configuration was saved. 
 
 ## Input

@@ -458,6 +458,10 @@ impl Configuration {
             (AbsAxisCode::ABS_RX, (ThresholdType::Lesser, -16000).into()),
             (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 16000).into()),
             (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -16000).into()),
+            // The pro controller D-pad is reported as axis values as opposed to buttons, with
+            // values of 1 and -1 indicating pressed in certain directions, and a value of 0
+            // indicating not pressed. Threshold values are inclusive, so these define for
+            // chord2key what values are considered pressed. 
             (AbsAxisCode::ABS_HAT0X, (ThresholdType::Greater, 1).into()),
             (AbsAxisCode::ABS_HAT0X, (ThresholdType::Lesser, -1).into()),
             (AbsAxisCode::ABS_HAT0Y, (ThresholdType::Greater, 1).into()),
@@ -555,6 +559,9 @@ impl Configuration {
         // Right stick click
         let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
 
+        // Left stick click
+        let LSC: ChordInput = KeyCode::BTN_THUMBL.into();
+
         // Auxillary buttons
         let Minus: ChordInput = KeyCode::BTN_SELECT.into();
         let Home: ChordInput = KeyCode::BTN_MODE.into();
@@ -575,7 +582,7 @@ impl Configuration {
             RSR,
             RSL,
             RSC,
-            KeyCode::BTN_THUMBL.into(),
+            LSC,
             Minus,
             Home,
             Capture,
@@ -797,7 +804,7 @@ impl Configuration {
                 Pulse::new(Some(vec![KeyCode::KEY_TAB]), None).into(),
             ),
             (
-                vec![KeyCode::BTN_THUMBL.into()],
+                vec![LSC],
                 Pulse::new(Some(vec![KeyCode::BTN_LEFT]), None).into(),
             ),
             (
