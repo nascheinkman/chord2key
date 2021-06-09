@@ -56,12 +56,16 @@ sudo YOUR_INSTALL_DIR/chord2key/target/release/chord2key YOUR_CONFIG_FILE
 ```
 
 ## Configuration
-The repo comes with configurations for two devices: the Nintendo Switch Pro Controller and Nintendo
-Switch Combined Joy-Cons. Both require the
-[dkms-hid-nintendo](https://github.com/nicman23/dkms-hid-nintendo) kernel module, and the joysticks
-require the [joycond](https://github.com/DanielOgorchock/joycond) daemon. You could then run the
-program using the provided configuration file. For instance, if you have the Pro controller, you
-would run 
+
+The repo comes with configurations for two devices: the [Nintendo Switch Pro
+Controller](https://github.com/nascheinkman/chord2key/wiki/Default-Nintendo-Pro-Controller-Configuration)
+and [Nintendo Switch Combined
+Joy-Cons](https://github.com/nascheinkman/chord2key/wiki/Default-Joycon-Configuration). Both require
+the [dkms-hid-nintendo](https://github.com/nicman23/dkms-hid-nintendo) kernel module, and the
+joysticks require the [joycond](https://github.com/DanielOgorchock/joycond) daemon. You could then
+run the program using the provided configuration file. For instance, if you have the Pro controller,
+you would run 
+
 ```
 cd YOUR_INSTALL_DIR/chord2key
 sudo target/release/chord2key configs/nintendo_pro_controller/pro_keyboard.json
