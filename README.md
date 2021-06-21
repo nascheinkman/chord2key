@@ -9,6 +9,8 @@ different because it allows for the mapping of combinations of gamepad buttons t
 keyboard+mouse action. This allows for a single gamepad to have user inputs that map to the entire
 keyboard while also controlling the mouse.
 
+![An example video showing usage](https://raw.githubusercontent.com/wiki/nascheinkman/chord2key/images/example.webp)
+
 ## Table of contents:
 
 - [About](#about)
@@ -54,6 +56,7 @@ The program can now be run in the terminal through the following command:
 ```
 sudo YOUR_INSTALL_DIR/chord2key/target/release/chord2key YOUR_CONFIG_FILE
 ```
+`sudo` is required to gain permission for creating the virtual keyboard + mouse device. 
 
 ## Configuration
 
