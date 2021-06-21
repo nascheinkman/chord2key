@@ -50,10 +50,7 @@ impl ThresholdedAxis {
     /// let t_axis = ThresholdedAxis::new(AbsAxisCode::ABS_X, ThresholdType::Greater);
     /// ```
     pub fn new(axis: AbsAxisCode, threshold: ThresholdType) -> Self {
-        Self {
-            axis,
-            threshold,
-        }
+        Self { axis, threshold }
     }
 
     /// Returns the ThresholdedAxis with the opposite threshold direction
@@ -160,7 +157,7 @@ impl AxisThreshold {
         let state = axis_event.state();
 
         (self.dir == ThresholdType::Greater && state >= self.threshold)
-        || (self.dir == ThresholdType::Lesser && state <= self.threshold)
+            || (self.dir == ThresholdType::Lesser && state <= self.threshold)
     }
 
     /// Changes self to have the lesser magnitude threshold, returning true if successful.

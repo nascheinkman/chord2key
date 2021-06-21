@@ -153,7 +153,11 @@ impl Mapper {
                 keys: KeyCode::iter().collect(),
                 state: PressState::Up,
             }),
-            Some(RelAxisCode::iter().map(|code| RelAxisEvent::new(code, 0)).collect()),
+            Some(
+                RelAxisCode::iter()
+                    .map(|code| RelAxisEvent::new(code, 0))
+                    .collect(),
+            ),
         );
         self.handle_action(handsoff.into());
     }

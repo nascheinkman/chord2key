@@ -1,0 +1,401 @@
+{
+  "device_name": "Nintendo Switch Right Joy-Con",
+  "axis_thresholds": [
+    [
+      "ABS_RX",
+      {
+        "dir": "Greater",
+        "threshold": 16000
+      }
+    ],
+    [
+      "ABS_RX",
+      {
+        "dir": "Lesser",
+        "threshold": -16000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Greater",
+        "threshold": 16000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Lesser",
+        "threshold": -16000
+      }
+    ]
+  ],
+  "chord_inputs": [
+    {
+      "Key": "BTN_SOUTH"
+    },
+    {
+      "Key": "BTN_WEST"
+    },
+    {
+      "Key": "BTN_NORTH"
+    },
+    {
+      "Key": "BTN_EAST"
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RY",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RY",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RX",
+        "threshold": "Greater"
+      }
+    },
+    {
+      "ThresholdedAxis": {
+        "axis": "ABS_RX",
+        "threshold": "Lesser"
+      }
+    },
+    {
+      "Key": "BTN_THUMBR"
+    },
+    {
+      "Key": "BTN_START"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_START"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "blank.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "mouse.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "letters.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "symbols.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTCTRL"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTALT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTSHIFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTMETA"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "StateChange": {
+            "keys": {
+              "keys": [
+                "KEY_LEFTCTRL",
+                "KEY_LEFTALT",
+                "KEY_LEFTSHIFT",
+                "KEY_LEFTMETA"
+              ],
+              "state": "Up"
+            },
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_VOLUMEUP"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RY",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_VOLUMEDOWN"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_PLAYPAUSE"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR2"
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_FASTFORWARD"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR2"
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_REWIND"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR"
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Greater"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_NEXTSONG"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR"
+        },
+        {
+          "ThresholdedAxis": {
+            "axis": "ABS_RX",
+            "threshold": "Lesser"
+          }
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "KEY_PREVIOUSSONG"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [
+    [
+      {
+        "Key": "BTN_MODE"
+      },
+      {
+        "InnerAction": {
+          "RepeatLastChord": "Toggle"
+        }
+      }
+    ]
+  ],
+  "mouse_mapping": []
+}

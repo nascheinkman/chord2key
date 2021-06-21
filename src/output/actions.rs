@@ -46,10 +46,7 @@ impl Toggle {
     /// );
     /// ```
     pub fn new(keys: Option<KeyList>, axes: Option<AxisList>) -> Self {
-        Self {
-            keys,
-            axes,
-        }
+        Self { keys, axes }
     }
 }
 
@@ -74,10 +71,7 @@ impl Pulse {
     /// assert!(pulse.axes.is_none());
     /// ```
     pub fn new(keys: Option<KeyList>, axes: Option<AxisList>) -> Self {
-        Self {
-            keys,
-            axes,
-        }
+        Self { keys, axes }
     }
 }
 
@@ -106,10 +100,7 @@ impl StateChange {
     /// assert!(change.keys.unwrap().keys[0] == KeyCode::KEY_W);
     /// ```
     pub fn new(keys: Option<KeyStateChange>, axes: Option<AxisList>) -> Self {
-        Self {
-            keys,
-            axes,
-        }
+        Self { keys, axes }
     }
 
     /// Inverts a StateChange to its reciprocal.

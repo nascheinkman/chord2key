@@ -1,0 +1,348 @@
+{
+  "device_name": "Nintendo Switch Right Joy-Con",
+  "axis_thresholds": [
+    [
+      "ABS_RX",
+      {
+        "dir": "Greater",
+        "threshold": 6000
+      }
+    ],
+    [
+      "ABS_RX",
+      {
+        "dir": "Lesser",
+        "threshold": -6000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Greater",
+        "threshold": 6000
+      }
+    ],
+    [
+      "ABS_RY",
+      {
+        "dir": "Lesser",
+        "threshold": -6000
+      }
+    ]
+  ],
+  "chord_inputs": [
+    {
+      "Key": "BTN_SOUTH"
+    },
+    {
+      "Key": "BTN_WEST"
+    },
+    {
+      "Key": "BTN_NORTH"
+    },
+    {
+      "Key": "BTN_EAST"
+    },
+    {
+      "Key": "BTN_START"
+    },
+    {
+      "Key": "BTN_THUMBR"
+    },
+    {
+      "Key": "BTN_TR"
+    },
+    {
+      "Key": "BTN_TR2"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_START"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "blank.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "letters.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "symbols.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "shortcuts.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTCTRL"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTALT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTSHIFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTMETA"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        },
+        {
+          "Key": "BTN_SOUTH"
+        },
+        {
+          "Key": "BTN_NORTH"
+        },
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "OutputAction": {
+          "StateChange": {
+            "keys": {
+              "keys": [
+                "KEY_LEFTCTRL",
+                "KEY_LEFTALT",
+                "KEY_LEFTSHIFT",
+                "KEY_LEFTMETA"
+              ],
+              "state": "Up"
+            },
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBR"
+        },
+        {
+          "Key": "BTN_TR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR2"
+        },
+        {
+          "Key": "BTN_THUMBR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TR2"
+        },
+        {
+          "Key": "BTN_THUMBR"
+        },
+        {
+          "Key": "BTN_TR"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": [
+    [
+      {
+        "axis": "ABS_RX",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_RX",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_RY",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_RY",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ]
+  ]
+}

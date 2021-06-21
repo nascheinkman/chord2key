@@ -25,7 +25,7 @@ fn main() {
     println!("Started keyboard + mouse emulation!\n");
 
     /*
-    let config = chord2key::mapping::configuration::Configuration::pro_default();
+    let config = chord2key::mapping::configuration::Configuration::r_joycon_mouse();
     config.save_to_file(config_path).ok();
     */
     /*

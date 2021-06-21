@@ -53,6 +53,832 @@ impl Configuration {
         Ok(config)
     }
 
+    #[allow(non_snake_case)]
+    pub fn r_joycon_shortcuts() -> Self {
+        // The name reported by the OS for the combined joycons device.
+        let device_name = String::from("Nintendo Switch Right Joy-Con");
+
+        // The absolute axes report their value as a value between -32768 and 32767. These
+        // thresholds define a quadrilateral deadzone where low value axis events will be considered
+        // zero.
+        let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
+            (AbsAxisCode::ABS_RX, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RX, (ThresholdType::Lesser, -16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -16000).into()),
+        ];
+
+        // One to one mapping of joycon buttons to commonly combined modifier keys. None of the
+        // buttons listed here should be used in chorded input.
+        let modifier_mapping: ModifierMapInput = vec![
+            // The home button gets mapped to repeat the last chord that resulted in an OutputAction
+            (
+                KeyCode::BTN_MODE.into(),
+                InnerAction::RepeatLastChord(OutputActionType::Toggle).into(),
+            ),
+        ];
+
+        let mouse_mapping: MouseMapInput = vec![];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
+        let B: ChordInput = KeyCode::BTN_SOUTH.into();
+        let Y: ChordInput = KeyCode::BTN_WEST.into();
+        let X: ChordInput = KeyCode::BTN_NORTH.into();
+        let A: ChordInput = KeyCode::BTN_EAST.into();
+        let Plus: ChordInput = KeyCode::BTN_START.into();
+
+        // Right stick movements
+        let RSU: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into();
+        let RSD: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Greater).into();
+        let RSR: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Greater).into();
+        let RSL: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into();
+
+        // Right stick click
+        let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Triggers
+        let R: ChordInput = KeyCode::BTN_TR.into();
+        let ZR: ChordInput = KeyCode::BTN_TR2.into();
+
+        // Defining all the inputs used for chording
+        let chord_inputs: Vec<ChordInput> = vec![B, Y, X, A, RSU, RSD, RSR, RSL, RSC, Plus];
+
+        // Mapping chords to actions.
+        let chord_mapping: ChordMapInput = vec![
+            (
+                vec![Plus],
+                InnerAction::SwitchConfig(Path::new("blank.json").to_path_buf()).into(),
+            ),
+            (
+                vec![B],
+                InnerAction::SwitchConfig(Path::new("mouse.json").to_path_buf()).into(),
+            ),
+            (
+                vec![A],
+                InnerAction::SwitchConfig(Path::new("letters.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X],
+                InnerAction::SwitchConfig(Path::new("symbols.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X, Y],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTCTRL]), None).into(),
+            ),
+            (
+                vec![Y, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
+            ),
+            (
+                vec![A, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTSHIFT]), None).into(),
+            ),
+            (
+                vec![X, A],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTMETA]), None).into(),
+            ),
+            (
+                vec![A, B, X, Y],
+                StateChange::new(
+                    Some(KeyStateChange {
+                        keys: vec![
+                            KeyCode::KEY_LEFTCTRL,
+                            KeyCode::KEY_LEFTALT,
+                            KeyCode::KEY_LEFTSHIFT,
+                            KeyCode::KEY_LEFTMETA,
+                        ],
+                        state: PressState::Up,
+                    }),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_VOLUMEUP]), None).into(),
+            ),
+            (
+                vec![RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_VOLUMEDOWN]), None).into(),
+            ),
+            (
+                vec![RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_PLAYPAUSE]), None).into(),
+            ),
+            (
+                vec![ZR, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_FASTFORWARD]), None).into(),
+            ),
+            (
+                vec![ZR, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_REWIND]), None).into(),
+            ),
+            (
+                vec![R, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_NEXTSONG]), None).into(),
+            ),
+            (
+                vec![R, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_PREVIOUSSONG]), None).into(),
+            ),
+        ];
+        Self {
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
+        }
+    }
+    #[allow(non_snake_case)]
+    pub fn r_joycon_symbols() -> Self {
+        // The name reported by the OS for the combined joycons device.
+        let device_name = String::from("Nintendo Switch Right Joy-Con");
+
+        // The absolute axes report their value as a value between -32768 and 32767. These
+        // thresholds define a quadrilateral deadzone where low value axis events will be considered
+        // zero.
+        let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
+            (AbsAxisCode::ABS_RX, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RX, (ThresholdType::Lesser, -16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -16000).into()),
+        ];
+
+        // One to one mapping of joycon buttons to commonly combined modifier keys. None of the
+        // buttons listed here should be used in chorded input.
+        let modifier_mapping: ModifierMapInput = vec![
+            // The home button gets mapped to repeat the last chord that resulted in an OutputAction
+            (
+                KeyCode::BTN_MODE.into(),
+                InnerAction::RepeatLastChord(OutputActionType::Toggle).into(),
+            ),
+        ];
+
+        let mouse_mapping: MouseMapInput = vec![];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
+        let B: ChordInput = KeyCode::BTN_SOUTH.into();
+        let Y: ChordInput = KeyCode::BTN_WEST.into();
+        let X: ChordInput = KeyCode::BTN_NORTH.into();
+        let A: ChordInput = KeyCode::BTN_EAST.into();
+        let Plus: ChordInput = KeyCode::BTN_START.into();
+
+        // Right stick movements
+        let RSU: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into();
+        let RSD: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Greater).into();
+        let RSR: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Greater).into();
+        let RSL: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into();
+
+        // Right stick click
+        let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Triggers
+        let R: ChordInput = KeyCode::BTN_TR.into();
+        let ZR: ChordInput = KeyCode::BTN_TR2.into();
+
+        // Defining all the inputs used for chording
+        let chord_inputs: Vec<ChordInput> = vec![B, Y, X, A, RSU, RSD, RSR, RSL, RSC, Plus];
+
+        // Mapping chords to actions.
+        let chord_mapping: ChordMapInput = vec![
+            (
+                vec![Plus],
+                InnerAction::SwitchConfig(Path::new("blank.json").to_path_buf()).into(),
+            ),
+            (
+                vec![B],
+                InnerAction::SwitchConfig(Path::new("mouse.json").to_path_buf()).into(),
+            ),
+            (
+                vec![A],
+                InnerAction::SwitchConfig(Path::new("letters.json").to_path_buf()).into(),
+            ),
+            (
+                vec![Y],
+                InnerAction::SwitchConfig(Path::new("shortcuts.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X, Y],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTCTRL]), None).into(),
+            ),
+            (
+                vec![Y, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
+            ),
+            (
+                vec![A, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTSHIFT]), None).into(),
+            ),
+            (
+                vec![X, A],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTMETA]), None).into(),
+            ),
+            (
+                vec![A, B, X, Y],
+                StateChange::new(
+                    Some(KeyStateChange {
+                        keys: vec![
+                            KeyCode::KEY_LEFTCTRL,
+                            KeyCode::KEY_LEFTALT,
+                            KeyCode::KEY_LEFTSHIFT,
+                            KeyCode::KEY_LEFTMETA,
+                        ],
+                        state: PressState::Up,
+                    }),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_0]), None).into(),
+            ),
+            (
+                vec![RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_1]), None).into(),
+            ),
+            (
+                vec![RSU, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_2]), None).into(),
+            ),
+            (
+                vec![RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_3]), None).into(),
+            ),
+            (
+                vec![RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_4]), None).into(),
+            ),
+            (
+                vec![RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_5]), None).into(),
+            ),
+            (
+                vec![RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_6]), None).into(),
+            ),
+            (
+                vec![RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_7]), None).into(),
+            ),
+            (
+                vec![RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_8]), None).into(),
+            ),
+            (
+                vec![RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_9]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_1]), None).into(),
+            ),
+            (
+                vec![ZR, RSU, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_2]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSU, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_3]), None).into(),
+            ),
+            (
+                vec![ZR, RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_4]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_5]), None).into(),
+            ),
+            (
+                vec![ZR, RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_6]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_7]), None).into(),
+            ),
+            (
+                vec![ZR, RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_8]), None).into(),
+            ),
+            (
+                vec![R, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_9]), None).into(),
+            ),
+            (
+                vec![R, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_0]), None).into(),
+            ),
+            (
+                vec![R, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_MINUS]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_EQUAL]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSL, RSU],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_MINUS]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, RSU],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_EQUAL]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, RSU, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_LEFTBRACE]), None).into(),
+            ),
+            (
+                vec![R, RSU, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHTBRACE]), None).into(),
+            ),
+            (
+                vec![R, RSL, RSD],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_LEFTBRACE]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, RSR, RSD],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_RIGHTBRACE]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![ZR, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_BACKSLASH]), None).into(),
+            ),
+            (
+                vec![R, ZR, RSU],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_BACKSLASH]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, ZR, RSL],
+                Pulse::new(
+                    Some(vec![KeyCode::KEY_RIGHTSHIFT, KeyCode::KEY_GRAVE]),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![R, ZR, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_GRAVE]), None).into(),
+            ),
+            (
+                vec![ZR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_UP]), None).into(),
+            ),
+            (
+                vec![ZR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_DOWN]), None).into(),
+            ),
+            (
+                vec![ZR, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_LEFT]), None).into(),
+            ),
+            (
+                vec![ZR, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_RIGHT]), None).into(),
+            ),
+        ];
+        Self {
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
+        }
+    }
+
+    #[allow(non_snake_case)]
+    pub fn r_joycon_mouse() -> Self {
+        let device_name = String::from("Nintendo Switch Right Joy-Con");
+        let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
+            (AbsAxisCode::ABS_RX, (ThresholdType::Greater, 6000).into()),
+            (AbsAxisCode::ABS_RX, (ThresholdType::Lesser, -6000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 6000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -6000).into()),
+        ];
+
+        // The absolute axes report their value between -32768 and 32767, but mouse events are
+        // currently emitted every 20ms, causing mouse speeds above values of 20 to be pretty fast.
+        // Thus the sensitivity for mouse movement (AKA the slope) is a very small number to bring
+        // those high axis ranges down to a usable speed.
+        const SENSITIVITY: f64 = 0.0006;
+
+        // Mapping joycon absolute axis inputs to mouse movement output
+        let mouse_mapping: MouseMapInput = vec![
+            (
+                (AbsAxisCode::ABS_RX, ThresholdType::Greater).into(),
+                MouseProfile {
+                    code: RelAxisCode::REL_X,
+                    slope: SENSITIVITY,
+                    offset: 0.0,
+                },
+            ),
+            (
+                (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into(),
+                MouseProfile {
+                    code: RelAxisCode::REL_X,
+                    slope: SENSITIVITY,
+                    offset: 0.0,
+                },
+            ),
+            (
+                (AbsAxisCode::ABS_RY, ThresholdType::Greater).into(),
+                MouseProfile {
+                    code: RelAxisCode::REL_Y,
+                    slope: SENSITIVITY,
+                    offset: 0.0,
+                },
+            ),
+            (
+                (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into(),
+                MouseProfile {
+                    code: RelAxisCode::REL_Y,
+                    slope: SENSITIVITY,
+                    offset: 0.0,
+                },
+            ),
+        ];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
+        let B: ChordInput = KeyCode::BTN_SOUTH.into();
+        let Y: ChordInput = KeyCode::BTN_WEST.into();
+        let X: ChordInput = KeyCode::BTN_NORTH.into();
+        let A: ChordInput = KeyCode::BTN_EAST.into();
+        let Plus: ChordInput = KeyCode::BTN_START.into();
+
+        // Right stick click
+        let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Triggers
+        let R: ChordInput = KeyCode::BTN_TR.into();
+        let ZR: ChordInput = KeyCode::BTN_TR2.into();
+
+        let chord_inputs: Vec<ChordInput> = vec![B, Y, X, A, Plus, RSC, R, ZR];
+
+        let chord_mapping: ChordMapInput = vec![
+            (
+                vec![Plus],
+                InnerAction::SwitchConfig(Path::new("blank.json").to_path_buf()).into(),
+            ),
+            (
+                vec![A],
+                InnerAction::SwitchConfig(Path::new("letters.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X],
+                InnerAction::SwitchConfig(Path::new("symbols.json").to_path_buf()).into(),
+            ),
+            (
+                vec![Y],
+                InnerAction::SwitchConfig(Path::new("shortcuts.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X, Y],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTCTRL]), None).into(),
+            ),
+            (
+                vec![Y, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
+            ),
+            (
+                vec![A, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTSHIFT]), None).into(),
+            ),
+            (
+                vec![X, A],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTMETA]), None).into(),
+            ),
+            (
+                vec![A, B, X, Y],
+                StateChange::new(
+                    Some(KeyStateChange {
+                        keys: vec![
+                            KeyCode::KEY_LEFTCTRL,
+                            KeyCode::KEY_LEFTALT,
+                            KeyCode::KEY_LEFTSHIFT,
+                            KeyCode::KEY_LEFTMETA,
+                        ],
+                        state: PressState::Up,
+                    }),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![RSC],
+                Pulse::new(Some(vec![KeyCode::BTN_LEFT]), None).into(),
+            ),
+            (
+                vec![RSC, R],
+                Pulse::new(Some(vec![KeyCode::BTN_RIGHT]), None).into(),
+            ),
+            (
+                vec![ZR, RSC],
+                Toggle::new(Some(vec![KeyCode::BTN_LEFT]), None).into(),
+            ),
+            (
+                vec![ZR, RSC, R],
+                Toggle::new(Some(vec![KeyCode::BTN_RIGHT]), None).into(),
+            ),
+        ];
+
+        let modifier_mapping: ModifierMapInput = vec![];
+
+        Self {
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
+        }
+    }
+
+    #[allow(non_snake_case)]
+    pub fn r_joycon_letters() -> Self {
+        // The name reported by the OS for the combined joycons device.
+        let device_name = String::from("Nintendo Switch Right Joy-Con");
+
+        // The absolute axes report their value as a value between -32768 and 32767. These
+        // thresholds define a quadrilateral deadzone where low value axis events will be considered
+        // zero.
+        let axis_thresholds: Vec<(AbsAxisCode, AxisThreshold)> = vec![
+            (AbsAxisCode::ABS_RX, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RX, (ThresholdType::Lesser, -16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Greater, 16000).into()),
+            (AbsAxisCode::ABS_RY, (ThresholdType::Lesser, -16000).into()),
+        ];
+
+        // One to one mapping of joycon buttons to commonly combined modifier keys. None of the
+        // buttons listed here should be used in chorded input.
+        let modifier_mapping: ModifierMapInput = vec![
+            // The home button gets mapped to repeat the last chord that resulted in an OutputAction
+            (
+                KeyCode::BTN_MODE.into(),
+                InnerAction::RepeatLastChord(OutputActionType::Toggle).into(),
+            ),
+        ];
+
+        let mouse_mapping: MouseMapInput = vec![];
+
+        // Aliasing codes to easily read joycon inputs
+
+        // Right buttons
+        let B: ChordInput = KeyCode::BTN_SOUTH.into();
+        let Y: ChordInput = KeyCode::BTN_WEST.into();
+        let X: ChordInput = KeyCode::BTN_NORTH.into();
+        let A: ChordInput = KeyCode::BTN_EAST.into();
+        let Plus: ChordInput = KeyCode::BTN_START.into();
+
+        // Right stick movements
+        let RSU: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Lesser).into();
+        let RSD: ChordInput = (AbsAxisCode::ABS_RY, ThresholdType::Greater).into();
+        let RSR: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Greater).into();
+        let RSL: ChordInput = (AbsAxisCode::ABS_RX, ThresholdType::Lesser).into();
+
+        // Right stick click
+        let RSC: ChordInput = KeyCode::BTN_THUMBR.into();
+
+        // Triggers
+        let R: ChordInput = KeyCode::BTN_TR.into();
+        let ZR: ChordInput = KeyCode::BTN_TR2.into();
+
+        // Defining all the inputs used for chording
+        let chord_inputs: Vec<ChordInput> = vec![B, Y, X, A, RSU, RSD, RSR, RSL, RSC, Plus];
+
+        // Mapping chords to actions.
+        let chord_mapping: ChordMapInput = vec![
+            (
+                vec![Plus],
+                InnerAction::SwitchConfig(Path::new("blank.json").to_path_buf()).into(),
+            ),
+            (
+                vec![B],
+                InnerAction::SwitchConfig(Path::new("mouse.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X],
+                InnerAction::SwitchConfig(Path::new("symbols.json").to_path_buf()).into(),
+            ),
+            (
+                vec![Y],
+                InnerAction::SwitchConfig(Path::new("shortcuts.json").to_path_buf()).into(),
+            ),
+            (
+                vec![X, Y],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTCTRL]), None).into(),
+            ),
+            (
+                vec![Y, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTALT]), None).into(),
+            ),
+            (
+                vec![A, B],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTSHIFT]), None).into(),
+            ),
+            (
+                vec![X, A],
+                Toggle::new(Some(vec![KeyCode::KEY_LEFTMETA]), None).into(),
+            ),
+            (
+                vec![A, B, X, Y],
+                StateChange::new(
+                    Some(KeyStateChange {
+                        keys: vec![
+                            KeyCode::KEY_LEFTCTRL,
+                            KeyCode::KEY_LEFTALT,
+                            KeyCode::KEY_LEFTSHIFT,
+                            KeyCode::KEY_LEFTMETA,
+                        ],
+                        state: PressState::Up,
+                    }),
+                    None,
+                )
+                .into(),
+            ),
+            (
+                vec![ZR, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_A]), None).into(),
+            ),
+            (
+                vec![R, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_B]), None).into(),
+            ),
+            (
+                vec![ZR, RSR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_C]), None).into(),
+            ),
+            (
+                vec![ZR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_D]), None).into(),
+            ),
+            (
+                vec![R, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_E]), None).into(),
+            ),
+            (
+                vec![RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_F]), None).into(),
+            ),
+            (
+                vec![RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_G]), None).into(),
+            ),
+            (
+                vec![RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_H]), None).into(),
+            ),
+            (
+                vec![ZR, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_I]), None).into(),
+            ),
+            (
+                vec![RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_J]), None).into(),
+            ),
+            (
+                vec![RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_K]), None).into(),
+            ),
+            (
+                vec![RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_L]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_M]), None).into(),
+            ),
+            (
+                vec![RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_N]), None).into(),
+            ),
+            (
+                vec![R, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_O]), None).into(),
+            ),
+            (
+                vec![R, RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_P]), None).into(),
+            ),
+            (
+                vec![ZR, RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_Q]), None).into(),
+            ),
+            (
+                vec![ZR, RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_R]), None).into(),
+            ),
+            (
+                vec![ZR, RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_S]), None).into(),
+            ),
+            (
+                vec![RSR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_T]), None).into(),
+            ),
+            (
+                vec![ZR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_U]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSL],
+                Pulse::new(Some(vec![KeyCode::KEY_V]), None).into(),
+            ),
+            (
+                vec![R, RSR],
+                Pulse::new(Some(vec![KeyCode::KEY_W]), None).into(),
+            ),
+            (
+                vec![R, RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_X]), None).into(),
+            ),
+            (
+                vec![R, RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_Y]), None).into(),
+            ),
+            (
+                vec![R, RSR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_Z]), None).into(),
+            ),
+            (
+                vec![RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_SPACE]), None).into(),
+            ),
+            (
+                vec![ZR, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_BACKSPACE]), None).into(),
+            ),
+            (
+                vec![R, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_ENTER]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSC],
+                Pulse::new(Some(vec![KeyCode::KEY_ESC]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_DOT]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_COMMA]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSR, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_APOSTROPHE]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSL, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_SLASH]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSR, RSU],
+                Pulse::new(Some(vec![KeyCode::KEY_TAB]), None).into(),
+            ),
+            (
+                vec![ZR, R, RSL, RSD],
+                Pulse::new(Some(vec![KeyCode::KEY_SEMICOLON]), None).into(),
+            ),
+        ];
+        Self {
+            device_name,
+            axis_thresholds,
+            chord_inputs,
+            chord_mapping,
+            modifier_mapping,
+            mouse_mapping,
+        }
+    }
     /// Returns a default joycon configuration mapped to the keyboard
     ///
     /// Example:
@@ -461,7 +1287,7 @@ impl Configuration {
             // The pro controller D-pad is reported as axis values as opposed to buttons, with
             // values of 1 and -1 indicating pressed in certain directions, and a value of 0
             // indicating not pressed. Threshold values are inclusive, so these define for
-            // chord2key what values are considered pressed. 
+            // chord2key what values are considered pressed.
             (AbsAxisCode::ABS_HAT0X, (ThresholdType::Greater, 1).into()),
             (AbsAxisCode::ABS_HAT0X, (ThresholdType::Lesser, -1).into()),
             (AbsAxisCode::ABS_HAT0Y, (ThresholdType::Greater, 1).into()),
@@ -569,23 +1395,7 @@ impl Configuration {
 
         // Defining all the inputs used for chording
         let chord_inputs: Vec<ChordInput> = vec![
-            B,
-            Y,
-            X,
-            A,
-            Right,
-            Left,
-            Up,
-            Down,
-            RSU,
-            RSD,
-            RSR,
-            RSL,
-            RSC,
-            LSC,
-            Minus,
-            Home,
-            Capture,
+            B, Y, X, A, Right, Left, Up, Down, RSU, RSD, RSR, RSL, RSC, LSC, Minus, Home, Capture,
         ];
 
         // Mapping chords to actions.

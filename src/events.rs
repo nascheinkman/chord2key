@@ -26,10 +26,7 @@ impl KeyEvent {
     /// assert!(ev1 == ev3);
     /// ```
     pub fn new(key: KeyCode, state: PressState) -> Self {
-        Self {
-            key,
-            state,
-        }
+        Self { key, state }
     }
 
     /// Retrieves the KeyCode for the event.
@@ -118,10 +115,7 @@ impl RelAxisEvent {
     /// assert!(ev1 == ev3);
     /// ```
     pub fn new(axis: RelAxisCode, val: AxisState) -> Self {
-        Self {
-            axis,
-            state: val,
-        }
+        Self { axis, state: val }
     }
 
     /// Retrieves the axis for the event.
@@ -207,10 +201,7 @@ impl AbsAxisEvent {
     /// assert!(ev1 == ev3);
     /// ```
     pub fn new(axis: AbsAxisCode, state: AxisState) -> Self {
-        Self {
-            axis,
-            state,
-        }
+        Self { axis, state }
     }
 
     /// Retrieves the axis for the event.

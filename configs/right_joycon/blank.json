@@ -1,0 +1,73 @@
+{
+  "device_name": "Nintendo Switch Right Joy-Con",
+  "axis_thresholds": [],
+  "chord_inputs": [
+    {
+      "Key": "BTN_SOUTH"
+    },
+    {
+      "Key": "BTN_WEST"
+    },
+    {
+      "Key": "BTN_NORTH"
+    },
+    {
+      "Key": "BTN_EAST"
+    },
+    {
+      "Key": "BTN_START"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_EAST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "letters.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_SOUTH"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "mouse.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_NORTH"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "symbols.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_WEST"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "shortcuts.json"
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": []
+}
