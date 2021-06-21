@@ -1,0 +1,348 @@
+{
+  "device_name": "Nintendo Switch Left Joy-Con",
+  "axis_thresholds": [
+    [
+      "ABS_X",
+      {
+        "dir": "Greater",
+        "threshold": 6000
+      }
+    ],
+    [
+      "ABS_X",
+      {
+        "dir": "Lesser",
+        "threshold": -6000
+      }
+    ],
+    [
+      "ABS_Y",
+      {
+        "dir": "Greater",
+        "threshold": 6000
+      }
+    ],
+    [
+      "ABS_Y",
+      {
+        "dir": "Lesser",
+        "threshold": -6000
+      }
+    ]
+  ],
+  "chord_inputs": [
+    {
+      "Key": "BTN_DPAD_DOWN"
+    },
+    {
+      "Key": "BTN_DPAD_LEFT"
+    },
+    {
+      "Key": "BTN_DPAD_UP"
+    },
+    {
+      "Key": "BTN_DPAD_RIGHT"
+    },
+    {
+      "Key": "BTN_SELECT"
+    },
+    {
+      "Key": "BTN_THUMBL"
+    },
+    {
+      "Key": "BTN_TL"
+    },
+    {
+      "Key": "BTN_TL2"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_SELECT"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "blank.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_RIGHT"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "letters.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_UP"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "symbols.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_LEFT"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "shortcuts.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_UP"
+        },
+        {
+          "Key": "BTN_DPAD_LEFT"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTCTRL"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_LEFT"
+        },
+        {
+          "Key": "BTN_DPAD_DOWN"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTALT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_RIGHT"
+        },
+        {
+          "Key": "BTN_DPAD_DOWN"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTSHIFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_UP"
+        },
+        {
+          "Key": "BTN_DPAD_RIGHT"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "KEY_LEFTMETA"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_RIGHT"
+        },
+        {
+          "Key": "BTN_DPAD_DOWN"
+        },
+        {
+          "Key": "BTN_DPAD_UP"
+        },
+        {
+          "Key": "BTN_DPAD_LEFT"
+        }
+      ],
+      {
+        "OutputAction": {
+          "StateChange": {
+            "keys": {
+              "keys": [
+                "KEY_LEFTCTRL",
+                "KEY_LEFTALT",
+                "KEY_LEFTSHIFT",
+                "KEY_LEFTMETA"
+              ],
+              "state": "Up"
+            },
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_THUMBL"
+        },
+        {
+          "Key": "BTN_TL"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TL2"
+        },
+        {
+          "Key": "BTN_THUMBL"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_LEFT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_TL2"
+        },
+        {
+          "Key": "BTN_THUMBL"
+        },
+        {
+          "Key": "BTN_TL"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Toggle": {
+            "keys": [
+              "BTN_RIGHT"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": [
+    [
+      {
+        "axis": "ABS_X",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_X",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_X",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_Y",
+        "threshold": "Greater"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ],
+    [
+      {
+        "axis": "ABS_Y",
+        "threshold": "Lesser"
+      },
+      {
+        "code": "REL_Y",
+        "slope": 0.0006,
+        "offset": 0.0
+      }
+    ]
+  ]
+}

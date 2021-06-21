@@ -1,0 +1,73 @@
+{
+  "device_name": "Nintendo Switch Left Joy-Con",
+  "axis_thresholds": [],
+  "chord_inputs": [
+    {
+      "Key": "BTN_DPAD_DOWN"
+    },
+    {
+      "Key": "BTN_DPAD_LEFT"
+    },
+    {
+      "Key": "BTN_DPAD_UP"
+    },
+    {
+      "Key": "BTN_DPAD_RIGHT"
+    },
+    {
+      "Key": "BTN_SELECT"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_DPAD_RIGHT"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "letters.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_DOWN"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "mouse.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_UP"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "symbols.json"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "Key": "BTN_DPAD_LEFT"
+        }
+      ],
+      {
+        "InnerAction": {
+          "SwitchConfig": "shortcuts.json"
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": []
+}
