@@ -423,7 +423,7 @@ where
     /// assert!(!subset.contains(&5));
     /// assert!(!subset.contains(&2));
     pub fn clear(&mut self) {
-        self.items.set_all(false);
+        self.items.fill(false);
     }
 
     /// An iterator visiting all the items in the subset in arbitrary order.
