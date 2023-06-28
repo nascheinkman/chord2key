@@ -61,7 +61,7 @@ mod tests {
             println!(
                 "This should type out 'hello world' from your keyboard with 30ms per key press after 500ms"
                 );
-            let board = OutputDevice::init()
+            let board = OutputDevice::init(None)
                 .expect("Could not create test OutputDevice, check the permissions!");
 
             sleep(Duration::from_millis(500));
@@ -91,7 +91,7 @@ mod tests {
             println!("\ntest_combo_states()");
             println!("This should type out the letter 'j' and move your mouse left");
 
-            let board = OutputDevice::init()
+            let board = OutputDevice::init(None)
                 .expect("Could not create test OutputDevice, check the permissions!");
 
             sleep(Duration::from_millis(500));

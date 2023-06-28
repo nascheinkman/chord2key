@@ -22,18 +22,9 @@ pub struct MouseProfile {
     pub code: RelAxisCode,
 
     /// The linear sensitivity of the mouse.
-    ///
-    /// The mouse velocity follows the following formula:
-    /// ```ignore
-    /// mouse_velocity = MouseProfile.slope * (axis_value - threshold_value) + MouseProfile.offset
-    /// ```
     pub slope: f64, // m in y = mx + b
 
     /// The linear offset of the mouse.
-    /// The mouse velocity follows the following formula:
-    /// ```ignore
-    /// mouse_velocity = MouseProfile.slope * (axis_value - threshold_value) + MouseProfile.offset
-    /// ```
     pub offset: f64, // b in y = mx + b
 }
 

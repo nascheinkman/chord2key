@@ -41,8 +41,8 @@ impl OutputDevice {
     ///
     /// Returns Ok([OutputDevice]) if successful. If it could not be created, it is likely that the
     /// program was not run with sufficient permissions.
-    pub fn init() -> Result<Self, std::io::Error> {
-        let mut output = VirtualOutput::init()?;
+    pub fn init(name: Option<&str>) -> Result<Self, std::io::Error> {
+        let mut output = VirtualOutput::init(name)?;
         let (tx, rx): (Sender<OutputAction>, Receiver<OutputAction>) = mpsc::channel();
         let _handle = thread::spawn(move || {
             let mut start = std::time::Instant::now();
@@ -134,7 +134,7 @@ impl VirtualOutput {
     /// Attempts to create a new VirtualOutput, returning a resulting containing itself.
     ///
     /// May fail due to lack of OS permissions.
-    pub fn init() -> std::io::Result<Self> {
+    pub fn init(name: Option<&str>) -> std::io::Result<Self> {
         let mut key_set = evdev::AttributeSet::<evdev::Key>::new();
         let mut rel_axes_vals = HashMap::<RelAxisCode, AxisState>::new();
         let mut key_states = HashMap::<KeyCode, PressState>::new();
@@ -150,7 +150,7 @@ impl VirtualOutput {
         });
 
         let device = VirtualDeviceBuilder::new()?
-            .name("chord2key Device")
+            .name(name.unwrap_or("chord2key Device"))
             .with_keys(&key_set)?
             .with_relative_axes(&axis_set)?
             .build()?;

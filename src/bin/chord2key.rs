@@ -21,7 +21,7 @@ fn main() {
     let config_path = &args[1];
 
     println!("Starting keyboard + mouse emulation...");
-    let output_device = OutputDevice::init().expect("Could not initialize the Output Device");
+    let output_device = OutputDevice::init(None).expect("Could not initialize the Output Device");
     println!("Started keyboard + mouse emulation!\n");
 
     /*
