@@ -77,6 +77,7 @@ fn check_output_actions_single() -> Result<(), Box<dyn std::error::Error>> {
     let events = input_device.collect_timeout(Duration::from_millis(common::TIMEOUT_TIME))?;
 
     // Check that it was correct
+    assert_eq!(events.len(), 2);
     let expected_event =
         InputEvent::KeyEvent(KeyEvent::new(KeyCode::BTN_TRIGGER_HAPPY1, PressState::Down));
     assert_eq!(events[0], expected_event);
@@ -156,6 +157,7 @@ fn check_output_actions_multiple() -> Result<(), Box<dyn std::error::Error>> {
     let events = input_device.collect_timeout(Duration::from_millis(common::TIMEOUT_TIME))?;
 
     // Check that it was correct
+    assert_eq!(events.len(), 8);
     let expected_event =
         InputEvent::KeyEvent(KeyEvent::new(KeyCode::BTN_TRIGGER_HAPPY1, PressState::Down));
     assert_eq!(events[0], expected_event);
@@ -188,6 +190,42 @@ fn check_output_actions_multiple() -> Result<(), Box<dyn std::error::Error>> {
         InputEvent::KeyEvent(KeyEvent::new(KeyCode::BTN_TRIGGER_HAPPY4, PressState::Up));
     assert_eq!(events[7], expected_event);
 
-    assert_eq!(events.len(), 8);
+    Ok(())
+}
+
+/// This test ensures that the output device can move the mouse
+#[test]
+fn check_can_move_mouse() -> Result<(), Box<dyn std::error::Error>> {
+    use chord2key::constants::RelAxisCode;
+    use chord2key::events::RelAxisEvent;
+    use chord2key::input::events::InputEvent;
+    use chord2key::output::actions::{OutputAction, Pulse, AxisList};
+
+    //Setup the devices
+    let name = "chord2key test device: check_output_actions_multiple";
+    let output_device = chord2key::output::device::OutputDevice::init(Some(&name))?;
+    let input_device = common::BackgroundInputDevice::from_name(&name)?;
+
+    let list: AxisList = vec![
+        (RelAxisCode::REL_X, 50),
+        (RelAxisCode::REL_Y, 50),
+    ].into();
+
+    let output_action = OutputAction::Pulse(Pulse::new(None, Some(list)));
+
+    output_device.execute_event(output_action)?;
+
+    std::thread::sleep(Duration::from_millis(common::SLEEP_TIME));
+
+    // Recieve the actions
+    let events = input_device.collect_timeout(Duration::from_millis(common::TIMEOUT_TIME))?;
+
+    let ev1 = InputEvent::RelAxisEvent(RelAxisEvent::new(RelAxisCode::REL_X, 50));
+    let ev2 = InputEvent::RelAxisEvent(RelAxisEvent::new(RelAxisCode::REL_Y, 50));
+
+    assert_eq!(events.len(), 2);
+    assert_eq!(events[0], ev1);
+    assert_eq!(events[1], ev2);
+
     Ok(())
 }
