@@ -28,6 +28,7 @@ impl InputDevice {
     /// ```
     pub fn from_name(name: &str) -> Option<Self> {
         evdev::enumerate()
+            .map(|(_, d)| d)
             .find(|d| d.name() == Some(name))
             .map(Self::from)
     }
@@ -36,7 +37,7 @@ impl InputDevice {
     ///
     /// Returns the Device chosen by the user.
     pub fn from_cli() -> Self {
-        let devices = evdev::enumerate().collect::<Vec<_>>();
+        let devices = evdev::enumerate().map(|(_, d)| d).collect::<Vec<_>>();
         for (i, d) in devices.iter().enumerate() {
             println!("{}: {}", i, d.name().unwrap_or("Unnamed device"));
         }
