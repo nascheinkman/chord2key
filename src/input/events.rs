@@ -1,4 +1,5 @@
 use crate::events::*;
+use crate::constants::*;
 use std::convert::TryFrom;
 
 /// The different types of events used by this crate.
@@ -26,5 +27,11 @@ impl TryFrom<evdev::InputEvent> for InputEvent {
             return Ok(Self::RelAxisEvent(ev_rel));
         }
         Err(error)
+    }
+}
+
+impl From<(KeyCode, PressState)> for InputEvent {
+    fn from(ev: (KeyCode, PressState)) -> Self {
+        InputEvent::KeyEvent(KeyEvent::new(ev.0, ev.1))
     }
 }

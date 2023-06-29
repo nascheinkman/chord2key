@@ -1,0 +1,30 @@
+{
+  "device_name": "chord2key test device: /one_to_one/one_to_one.json",
+  "axis_thresholds": [],
+  "chord_inputs": [
+    {
+      "Key": "BTN_TRIGGER_HAPPY1"
+    }
+  ],
+  "chord_mapping": [
+    [
+      [
+        {
+          "Key": "BTN_TRIGGER_HAPPY1"
+        }
+      ],
+      {
+        "OutputAction": {
+          "Pulse": {
+            "keys": [
+              "BTN_TRIGGER_HAPPY2"
+            ],
+            "axes": null
+          }
+        }
+      }
+    ]
+  ],
+  "modifier_mapping": [],
+  "mouse_mapping": []
+}
